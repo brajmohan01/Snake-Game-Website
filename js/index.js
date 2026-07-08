@@ -3,7 +3,7 @@ let inputDir = {x: 0, y: 0};
 const foodSound = new Audio('music/food.mp3');
 const gameOverSound = new Audio('music/gameover.mp3');
 const moveSound = new Audio('music/move.mp3');
-const musicSound = new Audio('music/music.mp3');
+// const musicSound = new Audio('music/music.mp3');
 let speed = 4;
 let score = 0;
 let lastPaintTime = 0;
@@ -13,8 +13,25 @@ let snakeArr = [
 
 food = {x: 6, y: 7};
 
+// Dialog Elements
+const gameOverDialog = document.getElementById('gameOverDialog');
+const finalScoreText = document.getElementById('finalScoreText');
+const restartBtn = document.getElementById('restartBtn');
+let isGameOver = false;
+
+restartBtn.addEventListener('click', () => {
+    gameOverDialog.close();
+    snakeArr = [{x: 13, y: 15}];
+    score = 0;
+    scoreBox.innerHTML = "Score: " + score;
+    inputDir = {x: 0, y: 0};
+    isGameOver = false;
+    window.requestAnimationFrame(main);
+});
+
 // Game Functions
 function main(ctime) {
+    if(isGameOver) return; // Pause loop
     window.requestAnimationFrame(main);
     // console.log(ctime)
     if((ctime - lastPaintTime)/1000 < 1/speed){
@@ -42,18 +59,18 @@ function  isCollide(snake)   {
 function gameEngine(){
     // Part 1: Updating the snake array & Food
     if(isCollide(snakeArr)){
-        gameOverSound.play();
-        musicSound.pause();
+        gameOverSound.play().catch(() => {});
+        // musicSound.pause();
         inputDir =  {x: 0, y: 0}; 
-        alert("Game Over. Press any key to play again!");
-        snakeArr = [{x: 13, y: 15}];
-        musicSound.play();
-        score = 0; 
+        isGameOver = true;
+        finalScoreText.innerText = "Score: " + score;
+        gameOverDialog.showModal();
+        return; 
     }
 
     // If you have eaten the food, increment the score and regenerate the food
     if(snakeArr[0].y === food.y && snakeArr[0].x ===food.x){
-        foodSound.play();
+        foodSound.play().catch(() => {});
         score += 1;
         if(score>hiscoreval){
             hiscoreval = score;
@@ -103,7 +120,7 @@ function gameEngine(){
 
 
 // Main logic starts here
-musicSound.play();
+// musicSound.play();
 let hiscore = localStorage.getItem("hiscore");
 if(hiscore === null){
     hiscoreval = 0;
@@ -117,7 +134,7 @@ else{
 window.requestAnimationFrame(main);
 window.addEventListener('keydown', e =>{
     inputDir = {x: 0, y: 1} // Start the game
-    moveSound.play();
+    moveSound.play().catch(() => {});
     switch (e.key) {
         case "ArrowUp":
             console.log("ArrowUp");
@@ -142,8 +159,27 @@ window.addEventListener('keydown', e =>{
             inputDir.x = 1;
             inputDir.y = 0;
             break;
-        default:
-            break;
     }
 
+});
+
+// Mobile Controls
+document.getElementById('btn-up').addEventListener('click', () => {
+    inputDir = {x: 0, y: -1};
+    moveSound.play().catch(() => {});
+});
+
+document.getElementById('btn-down').addEventListener('click', () => {
+    inputDir = {x: 0, y: 1};
+    moveSound.play().catch(() => {});
+});
+
+document.getElementById('btn-left').addEventListener('click', () => {
+    inputDir = {x: -1, y: 0};
+    moveSound.play().catch(() => {});
+});
+
+document.getElementById('btn-right').addEventListener('click', () => {
+    inputDir = {x: 1, y: 0};
+    moveSound.play().catch(() => {});
 });

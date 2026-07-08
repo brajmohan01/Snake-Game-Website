@@ -5,38 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnakeMania - Ek Gaming Katha</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <dialog id="gameOverDialog" class="game-over-dialog">
+        <h2 style="color: red; font-size: 32px;">Game Over!</h2>
+        <p id="finalScoreText" style="font-size: 24px; font-weight: bold; margin: 15px 0;">Score: 0</p>
+        <button id="restartBtn" class="restart-btn">Play Again</button>
+    </dialog>
+
     <div class="body">
-        <div id="top_left">Welcome</div>
-        <div id="top_left1">To</div>
-        <div id="top_left2">Shiva's </div>
-        <div id="top_left3">[ Snake-Mania ]</div>
-        <div id="ruler"> ____________</div>
-        <div id="rules"> Rules: -</div>
-        <div class="rules_are1">
-            1.Use Up Arrow to move up. &uarr;
-        </div>
-        <div class="rules_are2">
-            2.Use down Arrow to move down. &darr;
-        </div>
-        <div class="rules_are3">
-            3.Use left Arrow to move left. &larr;
-        </div>
-        <div class="rules_are4">
-            4.Use right Arrow to move right. &rarr;
-        </div>
-        <div class="rules_are5">
-            5.Don't touch the wall and yourself if you touch the wall and yourself the game will over.
-        </div>
-        <div class="rules_are6">
-           :: HOPE YOU LIKE THIS GAME ::
-        </div>
+        <div class="left-column">
+            <div class="title-section panel">
+                <h1>Welcome To Shiva's <br> [ Snake-Mania ]</h1>
+            </div>
             
-        <div id="scoreBox">Score: 0</div>
-        <div id="hiscoreBox">HiScore: 0</div>
-        <div id="board"></div>
+            <div class="rules-section panel">
+                <hr id="ruler">
+                <h2>Rules: -</h2>
+                <ul>
+                    <li>1. Use Up Arrow to move up. &uarr;</li>
+                    <li>2. Use Down Arrow to move down. &darr;</li>
+                    <li>3. Use Left Arrow to move left. &larr;</li>
+                    <li>4. Use Right Arrow to move right. &rarr;</li>
+                    <li>5. Don't touch the wall and yourself.</li>
+                </ul>
+                <p class="hope-text">:: HOPE YOU LIKE THIS GAME ::</p>
+            </div>
+        </div>
+        
+        <div class="game-section">
+            <div class="score-board">
+                <div id="scoreBox">Score: 0</div>
+                <div id="hiscoreBox">HiScore: 0</div>
+            </div>
+            <div id="board"></div>
+            <div class="mobile-controls">
+                <div class="d-pad-container">
+                    <div class="d-pad-ring">
+                        <button id="btn-up" class="pad-btn up"><span class="icon">&#9650;</span></button>
+                        <button id="btn-right" class="pad-btn right"><span class="icon">&#9654;</span></button>
+                        <button id="btn-left" class="pad-btn left"><span class="icon">&#9664;</span></button>
+                        <button id="btn-down" class="pad-btn down"><span class="icon">&#9660;</span></button>
+                    </div>
+                    <div class="pad-center">🐍</div>
+                </div>
+            </div>
     </div>
 </body>
 <script src="js/index.js"></script>
