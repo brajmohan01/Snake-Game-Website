@@ -48,8 +48,8 @@ function  isCollide(snake)   {
             return true;
         }
     }
-    // If you bump into the wall
-    if(snake[0].x >= 18 || snake[0].x <=0 || snake[0].y >= 18 || snake[0].y <=0){
+    // If you bump into the wall (Board is 1 to 18)
+    if(snake[0].x > 18 || snake[0].x <= 0 || snake[0].y > 18 || snake[0].y <= 0){
         return true;
     }
         
